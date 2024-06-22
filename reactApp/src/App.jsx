@@ -8,7 +8,7 @@ function App() {
   return (
     <>
     <Student_name name={"sugam"}/>
-    <Student_marks marks={"120"}/>
+    <Student_marks marks={"20"}/>
     </>
   )
 }
