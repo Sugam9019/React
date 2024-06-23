@@ -2,63 +2,41 @@ import { useState } from "react";
 
 function App() {
 
-  let [text,setText]=useState("Empty");
-  let [number,setNumber]=useState(0);
-  let [select,setSelect]=useState("Empty");
-  let [radio,setRadio]=useState("Offline");
+  const [obj,setObj]=useState({
+                                  Name:"Sugam",
+                                  USN:"A123",
+                                  Marks:68,
+                                  Number:123012151
+                              });
+                              
 
-  const changeText=(event)=>{
-    setText(event.target.value);
+  const changeName=(e)=>{
+    setObj({...obj,Name:e.target.value});
   }
 
-  const changeNumber=(event)=>{
-    setNumber(event.target.value);
+  const changeMarks=(e)=>{
+    setObj({...obj,Marks:e.target.value});
   }
 
-  const changeSelect=(event)=>{
-    setSelect(event.target.value);
-  }
-
-  const changeRadio=(event)=>{
-    setRadio(event.target.value)
+  const changeUSN=(e)=>{
+    setObj({...obj,USN:e.target.value});
   }
 
   return(
     <>
-      <input type="text" onChange={changeText}  placeholder="Name"/>
-      <p>Name : {text}</p>
-      <p>------------------------------</p>
-      
-      <input type="number"  value={number} onChange={changeNumber} placeholder="Number"/>
-      <p>Number : {number}</p>
-      <p>------------------------------</p>
+     
+    <p>Name : {obj.Name}</p>
+    <p>USN : {obj.USN}</p>
+    <p>Marks : {obj.Marks}</p>
+    <p>Number : {obj.Number}</p>
 
+    <p>-------------------</p>
 
-      <select onChange={changeSelect}>
-        <option value="Empty">Select transportation Mode</option>
-        <option value="Car">Car</option>
-        <option value="Bike">Bike</option>
-        <option value="Train">Train</option>
-        <option value="Flight">Flight</option>
-      </select>      
-      <p>Option : {select}</p>
-      <p>------------------------------</p>
-      
-
-      <label>
-        <input type="radio" value="Offline" onChange={changeRadio} checked={radio==="Offline"}  id="radio"/>
-        Offline
-      </label>
-      <br />
-      <label>
-        <input type="radio" value="Online" onChange={changeRadio} checked={radio==="Online"} id="radio"/>
-        Online
-      </label>
-
-      <p>Radio : {radio}</p>
-
-      
-
+    <input type="text" value={obj.Name} placeholder="Name" onChange={changeName}/>
+    <br />
+    <input type="number" value={obj.Marks} placeholder="Marks" onChange={changeMarks} />
+    <br />
+    <input type="text" value={obj.USN} placeholder="USN" onChange={changeUSN}/>
     </>
     
   );
