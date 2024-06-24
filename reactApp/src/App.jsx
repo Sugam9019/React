@@ -2,41 +2,47 @@ import { useState } from "react";
 
 function App() {
 
-  const [obj,setObj]=useState({
-                                  Name:"Sugam",
-                                  USN:"A123",
-                                  Marks:68,
-                                  Number:123012151
-                              });
-                              
+  const [text,setText]=useState("");
+  const [taskArr,setTaskArr]=useState([]);
 
-  const changeName=(e)=>{
-    setObj({...obj,Name:e.target.value});
+
+
+  const changeText=(e)=>{
+    setText(e.target.value);
   }
 
-  const changeMarks=(e)=>{
-    setObj({...obj,Marks:e.target.value});
-  }
-
-  const changeUSN=(e)=>{
-    setObj({...obj,USN:e.target.value});
+  const addTask=(e)=>{
+    setTaskArr([...taskArr,text]);
+    setText("");
   }
 
   return(
     <>
-     
-    <p>Name : {obj.Name}</p>
-    <p>USN : {obj.USN}</p>
-    <p>Marks : {obj.Marks}</p>
-    <p>Number : {obj.Number}</p>
 
-    <p>-------------------</p>
+    <div is="input-field">    
+      <input type="text" placeholder="Enter Task" onChange={changeText} value={text}/>
+      <button onClick={addTask}>Add</button>
+    </div>
 
-    <input type="text" value={obj.Name} placeholder="Name" onChange={changeName}/>
-    <br />
-    <input type="number" value={obj.Marks} placeholder="Marks" onChange={changeMarks} />
-    <br />
-    <input type="text" value={obj.USN} placeholder="USN" onChange={changeUSN}/>
+
+    <div id="task-field">
+      <ul>
+      {
+
+        taskArr.map((tasks,index)=>{
+
+          return (
+              <div id="task-c1" key={index}>
+                <li key={index}>{tasks} <button>completed</button> </li>
+              </div>
+            )
+        })
+      
+      }
+      </ul>
+    </div>
+
+    
     </>
     
   );
