@@ -16,8 +16,21 @@ function App() {
     setText("");
   }
 
+  const deleteTask=(e)=>{
+  
+    let updated_task=taskArr.filter((_,index)=>{
+      return index != e.target.id;
+    });
+
+    setTaskArr(updated_task);
+  }
+
+  console.log(taskArr)
+
   return(
     <>
+
+    <h1>To - Do - List</h1>
 
     <div is="input-field">    
       <input type="text" placeholder="Enter Task" onChange={changeText} value={text}/>
@@ -33,7 +46,7 @@ function App() {
 
           return (
               <div id="task-c1" key={index}>
-                <li key={index}>{tasks} <button>completed</button> </li>
+                <li key={index}>{tasks} <button id={index} onClick={deleteTask} >completed</button> </li>
               </div>
             )
         })
