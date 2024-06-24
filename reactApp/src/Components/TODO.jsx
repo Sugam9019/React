@@ -8,6 +8,7 @@ function TODO() {
   
 const [text,setText]=useState("");
 const [taskArr,setTaskArr]=useState([]);
+const [message,setMessage]=useState("No Tasks Yet ...");
 
 
 
@@ -18,6 +19,7 @@ const changeText=(e)=>{
 const addTask=(e)=>{
   setTaskArr([...taskArr,text]);
   setText("");
+  setMessage("");
 }
 
 const deleteTask=(e)=>{
@@ -31,6 +33,7 @@ const deleteTask=(e)=>{
 
 const reset=()=>{
   setTaskArr([]);
+  setMessage("No Tasks Yet ...");
 }
 
 // console.log(taskArr)
@@ -50,6 +53,7 @@ const reset=()=>{
 
 
     <div id="task-field">
+      <p id="message">{message}</p>
       <table>
         <tbody>
                 {
