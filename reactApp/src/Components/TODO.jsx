@@ -36,7 +36,7 @@ const reset=()=>{
   setMessage("No Tasks Yet ...");
 }
 
-// console.log(taskArr)
+
 
 
   return (
