@@ -4,36 +4,59 @@ import { useState,useEffect } from 'react';
 
 function Password() {
 
-    const [pass,setPass]=useState("..");
+    let [pass,setPass]=useState("....");
 
     const [chars,setChars]=useState([]);
 
-    // const [count,setCount]=useState(0);
+    // const chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*;:/?";
     
     useEffect(()=>{
+
+        let tmp=[];
+
         for(let i=65;i<=90;i++){
-            setChars(chars.push(String.fromCharCode(i)));
+            tmp=[...tmp,String.fromCharCode(i)]
         }
 
         for(let i=97;i<=122;i++){
-            setChars(chars.push(String.fromCharCode(i)));
+            tmp=[...tmp,String.fromCharCode(i)];
         }
 
         for(let i=0;i<=9;i++){
-            setChars(chars.push(i));
+            tmp=[...tmp,i];
         }
 
         let special_chars="@#$%^&*!+=-/:;"
         for(let i=0;i<special_chars.length;i++)
         {
-            setChars(chars.push(special_chars[i]));
+            tmp=[...tmp,special_chars[i]];
         }
 
-        console.log(chars);
+        setChars(tmp);
+        
     },[]);
+
+    useEffect(()=>{
+        console.log(pass);
+    },[pass]);
+    
+ 
+
 
     const genPassword=()=>{
 
+      
+        let tmp="";
+        const pass_length=Math.floor(Math.random() * (25-10) + 10);
+        console.log(pass_length);
+
+        for(let i=0;i<pass_length;i++){
+            let index=Math.floor(Math.random() * ((chars.length)-0) + 0);
+            tmp+=chars[index];
+
+        }
+
+        setPass(tmp);
       
     }
 
