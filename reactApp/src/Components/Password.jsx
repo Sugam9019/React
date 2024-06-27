@@ -8,6 +8,8 @@ function Password() {
 
     const [chars,setChars]=useState([]);
 
+    const [length,setLength]=useState(10);
+
     // const chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*;:/?";
     
     useEffect(()=>{
@@ -36,9 +38,9 @@ function Password() {
         
     },[]);
 
-    useEffect(()=>{
-        console.log(pass);
-    },[pass]);
+    // useEffect(()=>{
+    //     console.log(pass);
+    // },[pass]);
     
  
 
@@ -47,19 +49,23 @@ function Password() {
 
       
         let tmp="";
-        const pass_length=Math.floor(Math.random() * (25-10) + 10);
-        console.log(pass_length);
+        // const pass_length=Math.floor(Math.random() * (25-10) + 10);
+        // console.log(pass_length);
 
-        for(let i=0;i<pass_length;i++){
+        for(let i=0;i<length;i++){
             let index=Math.floor(Math.random() * ((chars.length)-0) + 0);
             tmp+=chars[index];
 
         }
+        console.log(tmp.length);
 
         setPass(tmp);
       
     }
 
+    const changeLength=(event)=>{
+        setLength(event.target.value);
+    }
     
     
   return (
@@ -67,7 +73,12 @@ function Password() {
         <h1>Password Generator</h1>
 
         <p>{pass}</p>
+
+        <input type="range" min='10' max='25' onChange={changeLength} /><span>Length : {length}</span>
+        <br />
+
         <button onClick={genPassword}>generate</button>
+
     </>
   )
 }
