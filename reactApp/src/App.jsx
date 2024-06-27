@@ -1,12 +1,12 @@
 
-import TODO from "./Components/TODO";
+import Password from "./Components/Password";
 
 function App() {
 
  
   return(
     
-    <TODO/>
+    <Password/>
     
   );
 }
