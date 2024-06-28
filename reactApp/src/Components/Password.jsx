@@ -10,8 +10,8 @@ function Password() {
 
     const [length,setLength]=useState(10);
 
-    // const chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*;:/?";
-    
+    const [checkbox,setCheckbox]=useState([]);
+
     useEffect(()=>{
 
         let tmp=[];
@@ -38,9 +38,7 @@ function Password() {
         
     },[]);
 
-    // useEffect(()=>{
-    //     console.log(pass);
-    // },[pass]);
+
     
  
 
@@ -67,14 +65,37 @@ function Password() {
         setLength(event.target.value);
     }
     
+    const changeCheckbox=(event)=>{
+        
+        if(event.target.checked){
+            setCheckbox([...checkbox,parseInt(event.target.value)]);
+        }
+        else{
+            setCheckbox(
+                checkbox.filter((data)=>{
+                    return data!=(parseInt(event.target.value));
+                })
+            );
+        }
+
+    }
     
   return (
     <>
         <h1>Password Generator</h1>
 
+        <h2>{checkbox}</h2>
+
         <p>{pass}</p>
 
         <input type="range" min='10' max='25' onChange={changeLength} /><span>Length : {length}</span>
+        <br />
+
+        <label htmlFor="c1"><input type="checkbox"  value="1" id='c1' onChange={changeCheckbox}  /> Alphabets</label><br />
+        <label htmlFor="c2"><input type="checkbox"  value="2" id='c2' onChange={changeCheckbox}  /> Numbers</label><br />
+        <label htmlFor="c3"><input type="checkbox"  value="3" id='c3' onChange={changeCheckbox}  /> Specila_characters</label><br />
+        
+        
         <br />
 
         <button onClick={genPassword}>generate</button>
