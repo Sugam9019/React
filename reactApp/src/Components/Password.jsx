@@ -42,6 +42,7 @@ function Password() {
     
     const changeLength=(event)=>{
         setLength(event.target.value);
+        genPassword();
     }
     
     const changeCheckbox=(event)=>{
@@ -111,7 +112,7 @@ function Password() {
         
         <br />
 
-        <button onClick={genPassword}>generate</button>
+        {/* <button onClick={genPassword}>generate</button> */}
 
         <button onClick={copy}>Copy</button>
 
