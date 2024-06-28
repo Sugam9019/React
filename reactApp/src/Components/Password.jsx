@@ -40,27 +40,6 @@ function Password() {
 
 
     
- 
-
-
-    const genPassword=()=>{
-
-      
-        let tmp="";
-        // const pass_length=Math.floor(Math.random() * (25-10) + 10);
-        // console.log(pass_length);
-
-        for(let i=0;i<length;i++){
-            let index=Math.floor(Math.random() * ((chars.length)-0) + 0);
-            tmp+=chars[index];
-
-        }
-        console.log(tmp.length);
-
-        setPass(tmp);
-      
-    }
-
     const changeLength=(event)=>{
         setLength(event.target.value);
     }
@@ -68,17 +47,53 @@ function Password() {
     const changeCheckbox=(event)=>{
         
         if(event.target.checked){
-            setCheckbox([...checkbox,parseInt(event.target.value)]);
+            setCheckbox([...checkbox,event.target.value]);
         }
         else{
             setCheckbox(
                 checkbox.filter((data)=>{
-                    return data!=(parseInt(event.target.value));
+                    return data!=(event.target.value);
                 })
             );
         }
 
     }
+
+    const genPassword=()=>{
+
+        const arr_pos={
+            "alp":[0,51],
+            "num":[52,61],
+            "spe":[62,76]
+
+        }
+
+      
+        let tmp="";
+        let ctr=0;
+        // const pass_length=Math.floor(Math.random() * (25-10) + 10);
+        // console.log(pass_length);
+        if(checkbox.length==0){
+            alert("select constraints in the checkbox");
+        }else{
+
+                checkbox.map((ele)=>{
+
+                    for(let i=1;i<=length;i++){
+                        let index=Math.floor(Math.random() * ((arr_pos[ele][1])-arr_pos[ele][0]) + arr_pos[ele][0]);
+                        tmp+=chars[index];
+            
+                    }
+                    // console.log(arr_pos[ele][0],arr_pos[ele][1])
+
+                });
+        }
+        // console.log(tmp.length);
+
+        setPass(tmp);
+      
+    }
+
     
   return (
     <>
@@ -91,9 +106,9 @@ function Password() {
         <input type="range" min='10' max='25' onChange={changeLength} /><span>Length : {length}</span>
         <br />
 
-        <label htmlFor="c1"><input type="checkbox"  value="1" id='c1' onChange={changeCheckbox}  /> Alphabets</label><br />
-        <label htmlFor="c2"><input type="checkbox"  value="2" id='c2' onChange={changeCheckbox}  /> Numbers</label><br />
-        <label htmlFor="c3"><input type="checkbox"  value="3" id='c3' onChange={changeCheckbox}  /> Specila_characters</label><br />
+        <label htmlFor="c1"><input type="checkbox"  value="alp" id='c1' onChange={changeCheckbox}  /> Alphabets</label><br />
+        <label htmlFor="c2"><input type="checkbox"  value="num" id='c2' onChange={changeCheckbox}  /> Numbers</label><br />
+        <label htmlFor="c3"><input type="checkbox"  value="spe" id='c3' onChange={changeCheckbox}  /> Specila_characters</label><br />
         
         
         <br />
