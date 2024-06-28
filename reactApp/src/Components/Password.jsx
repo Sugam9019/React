@@ -70,25 +70,19 @@ function Password() {
 
       
         let tmp="";
-        let ctr=0;
-        // const pass_length=Math.floor(Math.random() * (25-10) + 10);
-        // console.log(pass_length);
         if(checkbox.length==0){
             alert("select constraints in the checkbox");
         }else{
 
                 checkbox.map((ele)=>{
 
-                    for(let i=1;i<=length;i++){
+                    for(let i=1;i<=(length/checkbox.length);i++){
                         let index=Math.floor(Math.random() * ((arr_pos[ele][1])-arr_pos[ele][0]) + arr_pos[ele][0]);
                         tmp+=chars[index];
             
                     }
-                    // console.log(arr_pos[ele][0],arr_pos[ele][1])
-
                 });
         }
-        // console.log(tmp.length);
 
         setPass(tmp);
       
@@ -98,8 +92,6 @@ function Password() {
   return (
     <>
         <h1>Password Generator</h1>
-
-        <h2>{checkbox}</h2>
 
         <p>{pass}</p>
 
