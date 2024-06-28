@@ -88,12 +88,18 @@ function Password() {
       
     }
 
+    const copy=()=>{
+        const txt = document.getElementById("txt");
+        txt.select();
+        document.execCommand("copy");
+    }
+
     
   return (
     <>
         <h1>Password Generator</h1>
 
-        <p>{pass}</p>
+        <input type="text" value={pass} id="txt" readOnly/>
 
         <input type="range" min='10' max='25' onChange={changeLength} /><span>Length : {length}</span>
         <br />
@@ -106,6 +112,8 @@ function Password() {
         <br />
 
         <button onClick={genPassword}>generate</button>
+
+        <button onClick={copy}>Copy</button>
 
     </>
   )
