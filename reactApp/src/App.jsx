@@ -1,5 +1,4 @@
-
-import Project_TODO from "./Components/Project_TODO";
+import TODO from "./Components/TODO";
 
 function App() {
 
@@ -7,7 +6,7 @@ function App() {
   return(
     
     <>
-        <Project_TODO/>
+     <TODO/>
     </>
     
   );
