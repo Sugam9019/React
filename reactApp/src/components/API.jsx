@@ -9,7 +9,7 @@ function API() {
 
     const [apiData,setApiData]=useState([]);
     const [loadind,setLoading]=useState(true);
-    const [data,setData]=useState([]);
+    const [text,setText]=useState([]);
 
 
 
@@ -17,7 +17,7 @@ function API() {
 
        (async ()=>{
             
-            const request=await fetch("https://hn.algolia.com/api/v1/search?query=car")
+            const request=await fetch("https://hn.algolia.com/api/v1/search?query="+text)
             const response= await request.json()
             if(Object.keys(response).length>0){
                 setApiData(response.hits)
@@ -28,7 +28,7 @@ function API() {
        })()
 
 
-    },[])
+    },[text])
 
     let tmp_arr=[]
     apiData.map((objs)=>{
@@ -45,6 +45,14 @@ function API() {
 
     })
 
+    const changeText=(event)=>{
+        setText(event.target.value);
+    }
+    
+
+  
+
+
     let count =0;
 
     if(loadind){
@@ -53,7 +61,10 @@ function API() {
     
     return (
         
-            <>
+            <> 
+
+            Search : <input type="text" onChange={changeText} value={text}/>
+            {/* <button onClick={search_API}>Search</button> */}
 
                 {
         
