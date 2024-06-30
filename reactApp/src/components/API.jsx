@@ -1,4 +1,5 @@
 import React from 'react'
+import "./API.css"
 
 import { useEffect,useState } from 'react'
 
@@ -7,34 +8,74 @@ import { useEffect,useState } from 'react'
 function API() {
 
     const [apiData,setApiData]=useState([]);
+    const [loadind,setLoading]=useState(true);
+    const [data,setData]=useState([]);
+
+
 
     useEffect(()=>{
 
        (async ()=>{
-
-            const request=await fetch("https://hn.algolia.com/api/v1/search?query=html")
+            
+            const request=await fetch("https://hn.algolia.com/api/v1/search?query=car")
             const response= await request.json()
-            // console.log(response.hits)
-            setApiData(response.hits)
+            if(Object.keys(response).length>0){
+                setApiData(response.hits)
+                // console.log(response.hits);
+                setLoading(false)
+            }
+
        })()
-    
+
+
     },[])
 
-    apiData.map((obj)=>{
-        console.log(obj['_highlightResult']['author']['value'])
+    let tmp_arr=[]
+    apiData.map((objs)=>{
+        let tmp_obj={
+        author : objs['author'],
+        URL : objs['url'],
+        title : objs['title'],
+        views : objs['num_comments'],
+        date : objs['created_at'],
+        id : objs['objectID']
+        }
+
+        tmp_arr=[...tmp_arr,tmp_obj]
+
     })
 
-  return (
-    
-    <>
-        {/* {
-            apiData.map((obj)=>{
-                <p>{obj.author}</p>
-            })
-        } */}
-    </>
+    let count =0;
 
-  )
+    if(loadind){
+        return <h1>Loading Data, please wait ..</h1>
+    }else{
+    
+    return (
+        
+            <>
+
+                {
+        
+                    tmp_arr.map((data)=>{
+                        return(
+                            <div id='main_card' key={count++}>
+
+                                <div key={count++} id='f1'><b>Author</b> : {data.author}</div>
+                                <div key={count++} id='f2'><b>Title</b>  : {data.title}</div>
+                                <div key={count++} id='f3'><b>Date </b>  : {data.date}</div>
+                                <div key={count++} id='f4'><b>Views</b>  : {data.views}</div>
+                                <div key={count++} id='f5'><b>URL  </b>  : { data.URL}</div>
+
+                            </div>
+                        )
+                    })
+                }
+
+            </>
+
+        )
+    }
 }
 
 export default API
